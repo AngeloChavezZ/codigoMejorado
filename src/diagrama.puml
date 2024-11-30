@@ -1,0 +1,100 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+' Clases principales
+class ContenidoAudiovisual {
+    - titulo: String
+    - duracionEnMinutos: int
+    - genero: String
+    + getTitulo(): String
+    + getDuracionEnMinutos(): int
+    + getGenero(): String
+    + mostrarDetalles(): void
+}
+
+class Pelicula extends ContenidoAudiovisual {
+    - director: String
+    - actores: List<Actor>
+    + agregarActor(actor: Actor): void
+    + agregarActores(actores: List<Actor>): void
+    + getDirector(): String
+    + getActores(): List<Actor>
+    + mostrarDetalles(): void
+}
+
+class SerieDeTv extends ContenidoAudiovisual {
+    - temporadas: List<Temporada>
+    + agregarTemporada(temporada: Temporada): void
+    + getTemporadas(): List<Temporada>
+    + mostrarDetalles(): void
+}
+
+class Documental extends ContenidoAudiovisual {
+    - director: String
+    - investigadores: List<Investigador>
+    + agregarInvestigador(investigador: Investigador): void
+    + agregarInvestigadores(listaInvestigadores: List<Investigador>): void
+    + getDirector(): String
+    + getInvestigadores(): List<Investigador>
+    + mostrarDetalles(): void
+}
+
+class DocumentalInteractivo extends ContenidoAudiovisual {
+    - tema: String
+    - opcionesInteractivas: List<String>
+    + agregarOpcionInteractiva(opcion: String): void
+    + agregarOpcionesInteractivas(opciones: List<String>): void
+    + getTema(): String
+    + getOpcionesInteractivas(): List<String>
+    + mostrarDetalles(): void
+}
+
+class EspectaculoEnVivo extends ContenidoAudiovisual {
+    - lugar: String
+    - fecha: String
+    + getLugar(): String
+    + getFecha(): String
+    + mostrarDetalles(): void
+}
+
+' Clases auxiliares
+class Actor {
+    - nombre: String
+    - edad: int
+    - nacionalidad: String
+    + getNombre(): String
+    + getEdad(): int
+    + getNacionalidad(): String
+}
+
+class Investigador {
+    - nombre: String
+    - especializacion: String
+    - afiliacion: String
+    + getNombre(): String
+    + getEspecializacion(): String
+    + getAfiliacion(): String
+}
+
+class Temporada {
+    - numeroTemporada: int
+    - episodios: List<String>
+    + getNumeroTemporada(): int
+    + getEpisodios(): List<String>
+    + mostrarDetalles(): void
+}
+
+' Relaciones
+ContenidoAudiovisual <|-- Pelicula
+ContenidoAudiovisual <|-- SerieDeTv
+ContenidoAudiovisual <|-- Documental
+ContenidoAudiovisual <|-- DocumentalInteractivo
+ContenidoAudiovisual <|-- EspectaculoEnVivo
+
+Pelicula "1" *-- "0..*" Actor
+Documental "1" *-- "0..*" Investigador
+SerieDeTv "1" *-- "0..*" Temporada
+Temporada "1" *-- "0..*" String : episodios
+DocumentalInteractivo "1" *-- "0..*" String : opcionesInteractivas
+
+@enduml

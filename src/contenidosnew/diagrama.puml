@@ -1,0 +1,17 @@
+@startuml
+class Pelicula {
+    - titulo: String
+    - duracion: int
+    - genero: String
+    - director: String
+    + mostrarDetalles(): void
+}
+
+class Actor {
+    - nombre: String
+    - edad: int
+    - nacionalidad: String
+}
+
+Pelicula --> Actor : tiene
+@enduml
